@@ -1,0 +1,89 @@
+@startuml
+left to right direction
+Class 借阅者{
+姓名
+性别
+电话
+借书卡号
+身份证号
+图书限额
+已借图书数目
+信誉额度
+queryBook()
+borrowBook()
+returnBook()
+reserveBook()
+renewBook()
+}
+Class 图书管理员{
+姓名
+职工号
+agreeBorrowBook()
+agreeReturnBook()
+fine()
+}
+Class 系统管理员{
+姓名
+职工号
+addBook()
+deleteBook()
+updateBook()
+queryBook()
+addUser()
+deleteUser()
+updateUser()
+queryUser()
+}
+Class 借书记录{
+借书日期
+应还日期
+归还日期
+}
+Class 逾期记录{
+逾期天数
+count()
+}
+Class 罚款细则{
+罚款金额
+fine()
+}
+Class 预订记录{
+借书卡号
+ISBN
+预订日期
+}
+Class 图书书目{
+作者
+ISBN编号
+出版社
+出版日期
+}
+Class 馆藏资源{
+资源名称
+国际出版号
+价格
+简介
+馆藏数量
+可借数量
+}
+Class 资源项{
+馆藏流水号
+状态
+}
+Class 数据存储类{
+query()
+update()
+}
+借阅者 -- 借书记录
+图书管理员 "1" -- "*"借书记录 :登记
+借书记录"1" -- "0..1"逾期记录
+逾期记录"*" -- "0..1"罚款细则:使用
+借书记录 "*" -- "1"数据存储类
+预订记录"*" -- "1"借阅者
+预订记录 "*" -- "1" 数据存储类
+馆藏资源"1" -- "*"预订记录 :被预订
+图书书目 --|> 馆藏资源
+借书记录 -- 资源项
+馆藏资源"1" *-- "*"资源项
+数据存储类 -- 系统管理员
+@enduml

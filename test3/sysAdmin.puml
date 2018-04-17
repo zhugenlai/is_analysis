@@ -1,0 +1,6 @@
+@startuml
+object 系统管理员{
+    姓名:根来
+    职工号:S12345678
+}
+@enduml
